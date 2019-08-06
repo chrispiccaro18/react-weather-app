@@ -5,11 +5,12 @@ const WEATHER_BASE_URL = 'https://api.weather.gov';
 
 export const getLatLng = zipCode => get(LAT_LNG_BASE_URL, zipCode);
 
-export const getWeatherLoc = (lat, lng) => get(WEATHER_BASE_URL, `/points/${lat},${lng}`);
+export const getWeatherLoc = (lat, lng) => get(WEATHER_BASE_URL, `points/${lat},${lng}`);
 
 export const getWeather = zipCode => {
   return getLatLng(zipCode)
     .then(latLng => {
+      console.log(latLng);
       if(Object.entries(latLng).length === 0 && latLng.constructor === Object) {
         return 'invalid zip-code';
       }

@@ -1,11 +1,6 @@
-const request = (url, path, method, body) => {
-  return fetch(`${url}/${path}`, {
-    method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: body ? JSON.stringify(body) : null
-  })
+const request = (url, path, method) => {
+  // console.log(`${url}${path ? `/${path}` : ''}`);
+  return fetch(`${url}${path ? `/${path}` : ''}`)
     .then(res => ([res.ok, res.json()]))
     .then(([ok, json]) => {
       if(!ok) throw `Unable to ${method} from ${url}`;

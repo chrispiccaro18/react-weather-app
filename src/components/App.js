@@ -1,10 +1,6 @@
 import React from 'react';
-import SearchForm from './search/SearchForm';
+import Home from './pages/Home';
 
 export default function App() {
-  return <SearchForm onSubmit={submitFunc}></SearchForm>;
-}
-
-const submitFunc = zipCode => {
-  console.log(zipCode);
+  return <Home />;
 }

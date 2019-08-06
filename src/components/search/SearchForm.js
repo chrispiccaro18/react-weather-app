@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { updateZipCode } from '../../actions/zipCodeActions';
+import { checkWeather } from '../../actions/weatherActions';
 
-export default class SearchForm extends PureComponent {
+class SearchForm extends PureComponent {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired
   }
@@ -39,3 +42,15 @@ export default class SearchForm extends PureComponent {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  onSubmit(zipCode) {
+    dispatch(updateZipCode(zipCode));
+    dispatch(checkWeather(zipCode.zipCode));
+  }
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SearchForm);
