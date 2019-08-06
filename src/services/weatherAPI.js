@@ -10,7 +10,6 @@ export const getWeatherLoc = (lat, lng) => get(WEATHER_BASE_URL, `points/${lat},
 export const getWeather = zipCode => {
   return getLatLng(zipCode)
     .then(latLng => {
-      console.log(latLng);
       if(Object.entries(latLng).length === 0 && latLng.constructor === Object) {
         return 'invalid zip-code';
       }
@@ -25,7 +24,6 @@ export const getWeather = zipCode => {
           ])
             .then(([location, dirtyForecasts]) => {
               const { city, state } = location;
-              console.log(location, dirtyForecasts);
               return {
                 location: {
                   city,
