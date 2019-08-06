@@ -1,6 +1,7 @@
 const request = (url, path, method) => {
-  // console.log(`${url}${path ? `/${path}` : ''}`);
-  return fetch(`${url}${path ? `/${path}` : ''}`)
+  const isPath = path ? `/${path}` : '';
+  
+  return fetch(`${url}${isPath}`)
     .then(res => ([res.ok, res.json()]))
     .then(([ok, json]) => {
       if(!ok) throw `Unable to ${method} from ${url}`;

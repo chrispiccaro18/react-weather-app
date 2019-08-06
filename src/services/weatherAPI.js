@@ -25,13 +25,13 @@ export const getWeather = zipCode => {
           ])
             .then(([location, dirtyForecasts]) => {
               const { city, state } = location;
-
+              console.log(location, dirtyForecasts);
               return {
                 location: {
                   city,
                   state
                 },
-                forecasts: cleanForecast(dirtyForecasts)
+                forecasts: cleanForecast(dirtyForecasts.properties.periods)
               };
             });
         });
