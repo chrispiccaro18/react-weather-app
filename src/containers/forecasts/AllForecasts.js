@@ -13,7 +13,7 @@ class AllForecasts extends PureComponent {
       PropTypes.shape({
         name: PropTypes.string,
         isDaytime: PropTypes.bool,
-        temperature: PropTypes.string,
+        temperature: PropTypes.number,
         temperatureUnit: PropTypes.string,
         icon: PropTypes.string,
         shortForecast: PropTypes.string,
@@ -21,7 +21,7 @@ class AllForecasts extends PureComponent {
     ),
     loading: PropTypes.bool.isRequired,
     zipCode: PropTypes.string,
-    location: PropTypes.shape({
+    weatherLocation: PropTypes.shape({
       city: PropTypes.string,
       state: PropTypes.string
     }),
@@ -41,15 +41,13 @@ class AllForecasts extends PureComponent {
   // }
 
   render() {
-    console.log(this.props.forecasts)
-    const { forecasts, loading } = this.props;
+    const { forecasts, loading, weatherLocation } = this.props;
     if(loading) return <h1>LOADING</h1>;
 
-    // const city = location.city || 'Darien';
-    // const state = location.state || 'CT';
+    const { city, state } = weatherLocation;
     return (
       <>
-        {/* <h2>5 Day Forecast for {city}, {state}</h2> */}
+        <h2>5 Day Forecast for {city}, {state}</h2>
         <ForecastCards forecasts={forecasts} />
       </>
     );
@@ -60,7 +58,7 @@ class AllForecasts extends PureComponent {
 const mapStateToProps = state => ({
   forecasts: selectForecasts(state),
   loading: selectForecastsLoading(state),
-  // location: selectLocation(state),
+  weatherLocation: selectLocation(state),
   zipCode: selectZipCode(state)
 });
 
