@@ -1,0 +1,54 @@
+form, section {
+  padding: 0.1rem;
+  margin: 1rem;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+ul li {
+  list-style-type: none;
+
+  text-align: center;
+
+  height: 30vh;
+  width: 15vw;
+
+  padding: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  
+  border: 1px solid black;
+  border-radius: 5%;
+
+  transition: transform .2s ease;
+
+  background: linear-gradient(to right, #00A4FF, #0072FF);
+}
+
+ul li:hover {
+  transform: scale(1.25);
+}
+
+ul li .temp {
+  font-size: 1.5rem;
+}
+
+ul li .short {
+  font-size: 0.75rem;
+}
+
+ul li .icon {
+  max-width: 100%;
+  max-height: 40%;
+}

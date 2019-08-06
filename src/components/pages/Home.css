@@ -1,0 +1,39 @@
+header, main {
+  width: 100%;
+}
+
+header, form {
+  padding: 0.1rem;
+  margin: 1rem;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+form {
+  height: 2rem;
+
+  font-size: 1.1rem;
+
+  display: flex;
+}
+
+form label {
+  /* height: 84%; */
+  align-self: center;
+}
+
+form input {
+  flex-grow: 2;
+}
+
+form button {
+  flex-grow: 1.5;
+  font-size: 1.25rem;
+}
