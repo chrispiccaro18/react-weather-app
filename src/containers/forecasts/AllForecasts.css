@@ -8,12 +8,12 @@ h2 {
   font-size: 1.5rem;
 }
 
-#forecast {
+ul {
   display: flex;
   justify-content: space-between;
 }
 
-#forecast li {
+ul li {
   list-style-type: none;
 
   text-align: center;
@@ -36,19 +36,19 @@ h2 {
   background: linear-gradient(to right, #00A4FF, #0072FF);
 }
 
-#forecast li:hover {
+ul li:hover {
   transform: scale(1.25);
 }
 
-#forecast li .temp {
+ul li .temp {
   font-size: 1.5rem;
 }
 
-#forecast li .short {
+ul li .short {
   font-size: 0.75rem;
 }
 
-#forecast li .icon {
+ul li .icon {
   max-width: 100%;
   max-height: 40%;
 }
