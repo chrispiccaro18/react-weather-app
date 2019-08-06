@@ -29,7 +29,7 @@ class SearchForm extends PureComponent {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="zipCode">Search by Zip-Code</label>
+        <label htmlFor="zipCode">Search by Zip-Code:</label>
         <input
           type="text"
           name="zipCode"
