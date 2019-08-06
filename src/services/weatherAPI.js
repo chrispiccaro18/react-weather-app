@@ -18,7 +18,6 @@ export const getWeather = zipCode => {
 
       return getWeatherLoc(lat, lng)
         .then(weatherLoc => {
-          console.log(weatherLoc.properties.forecast);
           return Promise.all([
             weatherLoc.properties.relativeLocation.properties,
             get(weatherLoc.properties.forecast)
@@ -30,7 +29,7 @@ export const getWeather = zipCode => {
                   city,
                   state
                 },
-                forecasts: cleanForecast(dirtyForecasts.properties.periods)
+                forecasts: cleanForecast(dirtyForecasts.properties.periods).slice(0, 5)
               };
             });
         });

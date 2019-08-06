@@ -8,7 +8,7 @@ export default function reducer(state = initialState, action) {
   const { type, payload } = action;
   switch(type) {
     case UPDATE_ZIP_CODE:
-      return { ...state, zipCode: payload };
+      return { ...state, zipCode: payload.zipCode };
     default:
       return state;
   }
