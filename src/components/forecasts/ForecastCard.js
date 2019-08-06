@@ -27,7 +27,7 @@ ForecastCard.propTypes = {
   forecast: PropTypes.shape({
     name: PropTypes.string.isRequired,
     isDaytime: PropTypes.bool.isRequired,
-    temperature: PropTypes.string.isRequired,
+    temperature: PropTypes.number.isRequired,
     temperatureUnit: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
     shortForecast: PropTypes.string.isRequired,
