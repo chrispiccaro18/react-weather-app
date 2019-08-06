@@ -5,7 +5,7 @@ import './AllForecasts.css';
 import { selectForecasts, selectForecastsLoading, selectLocation } from '../../selectors/weatherSelectors';
 import { selectZipCode } from '../../selectors/zipCodeSelectors';
 import ForecastCards from '../../components/forecasts/ForecastCards';
-import { checkWeather } from '../../actions/weatherActions';
+import { checkWeather, checkWeatherLatLng } from '../../actions/weatherActions';
 
 class AllForecasts extends PureComponent {
   static propTypes = {
@@ -26,11 +26,22 @@ class AllForecasts extends PureComponent {
       state: PropTypes.string
     }),
     fetch: PropTypes.func.isRequired,
+    fetchLatLng: PropTypes.func.isRequired
   }
 
   componentDidMount() {
-    const { fetch } = this.props;
-    fetch('06820');
+    if('geolocation' in navigator) {
+      /* geolocation is available */
+      const { fetchLatLng } = this.props;
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(navigator);
+        fetchLatLng(position.coords.latitude, position.coords.longitude);
+      });
+    } else {
+      /* geolocation IS NOT available */
+      const { fetch } = this.props;
+      fetch('90048');
+    }
   }
 
   // componentDidUpdate(prevProps) {
@@ -65,6 +76,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetch(zipCode) {
     dispatch(checkWeather(zipCode));
+  },
+  fetchLatLng(lat, lng) {
+    dispatch(checkWeatherLatLng(lat, lng));
   }
 });
 

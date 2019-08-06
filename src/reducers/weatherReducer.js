@@ -1,4 +1,4 @@
-import { CHECK_WEATHER_PENDING, CHECK_WEATHER } from '../actions/weatherActions';
+import { CHECK_WEATHER_PENDING, CHECK_WEATHER, CHECK_WEATHER_LAT_LNG_PENDING, CHECK_WEATHER_LAT_LNG } from '../actions/weatherActions';
 
 const initialState = {
   loading: false,
@@ -10,8 +10,10 @@ export default function reducer(state = initialState, action) {
   const { type, payload } = action;
   switch(type) {
     case CHECK_WEATHER_PENDING:
+    case CHECK_WEATHER_LAT_LNG_PENDING:
       return { ...state, loading: true };
     case CHECK_WEATHER:
+    case CHECK_WEATHER_LAT_LNG:
       return {
         ...state,
         loading: false,

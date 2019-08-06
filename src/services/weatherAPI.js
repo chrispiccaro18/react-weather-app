@@ -7,6 +7,26 @@ export const getLatLng = zipCode => get(LAT_LNG_BASE_URL, zipCode);
 
 export const getWeatherLoc = (lat, lng) => get(WEATHER_BASE_URL, `points/${lat},${lng}`);
 
+export const getWeatherUsingLatLng = (lat, lng) => {
+  return getWeatherLoc(lat, lng)
+    .then(weatherLoc => {
+      return Promise.all([
+        weatherLoc.properties.relativeLocation.properties,
+        get(weatherLoc.properties.forecast)
+      ])
+        .then(([location, dirtyForecasts]) => {
+          const { city, state } = location;
+          return {
+            location: {
+              city,
+              state
+            },
+            forecasts: cleanForecast(dirtyForecasts.properties.periods).slice(0, 5)
+          };
+        });
+    });
+};
+
 export const getWeather = zipCode => {
   return getLatLng(zipCode)
     .then(latLng => {
