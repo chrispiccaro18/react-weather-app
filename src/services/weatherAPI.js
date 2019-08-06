@@ -18,6 +18,7 @@ export const getWeather = zipCode => {
 
       return getWeatherLoc(lat, lng)
         .then(weatherLoc => {
+          console.log(weatherLoc.properties.forecast);
           return Promise.all([
             weatherLoc.properties.relativeLocation.properties,
             get(weatherLoc.properties.forecast)
