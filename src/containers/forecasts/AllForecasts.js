@@ -6,6 +6,7 @@ import { selectForecasts, selectForecastsLoading, selectLocation } from '../../s
 import { selectZipCode } from '../../selectors/zipCodeSelectors';
 import ForecastCards from '../../components/forecasts/ForecastCards';
 import { checkWeather, checkWeatherLatLng } from '../../actions/weatherActions';
+import Loading from '../../components/loading/Loading';
 
 class AllForecasts extends PureComponent {
   static propTypes = {
@@ -34,7 +35,6 @@ class AllForecasts extends PureComponent {
       /* geolocation is available */
       const { fetchLatLng } = this.props;
       navigator.geolocation.getCurrentPosition(position => {
-        console.log(navigator);
         fetchLatLng(position.coords.latitude, position.coords.longitude);
       });
     } else {
@@ -53,7 +53,7 @@ class AllForecasts extends PureComponent {
 
   render() {
     const { forecasts, loading, weatherLocation } = this.props;
-    if(loading) return <h1>LOADING</h1>;
+    if(loading) return <Loading />;
 
     const { city, state } = weatherLocation;
     return (
