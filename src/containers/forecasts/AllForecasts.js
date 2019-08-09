@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './AllForecasts.css';
-import { selectForecasts, selectForecastsLoading, selectLocation } from '../../selectors/weatherSelectors';
+import { selectForecasts, selectForecastsLoading, selectLocation, selectValid } from '../../selectors/weatherSelectors';
 import { selectZipCode } from '../../selectors/zipCodeSelectors';
 import ForecastCards from '../../components/forecasts/ForecastCards';
 import { checkWeather, checkWeatherLatLng } from '../../actions/weatherActions';
@@ -26,6 +26,7 @@ class AllForecasts extends PureComponent {
       city: PropTypes.string,
       state: PropTypes.string
     }),
+    valid: PropTypes.bool.isRequired,
     fetch: PropTypes.func.isRequired,
     fetchLatLng: PropTypes.func.isRequired
   }
@@ -52,8 +53,15 @@ class AllForecasts extends PureComponent {
   // }
 
   render() {
-    const { forecasts, loading, weatherLocation } = this.props;
+    const {
+      forecasts,
+      loading,
+      weatherLocation,
+      valid,
+      zipCode
+    } = this.props;
     if(loading) return <Loading />;
+    if(!valid) return <h2>{zipCode} is not a valid US Zip Code!</h2>;
 
     const { city, state } = weatherLocation;
     return (
@@ -70,7 +78,8 @@ const mapStateToProps = state => ({
   forecasts: selectForecasts(state),
   loading: selectForecastsLoading(state),
   weatherLocation: selectLocation(state),
-  zipCode: selectZipCode(state)
+  zipCode: selectZipCode(state),
+  valid: selectValid(state)
 });
 
 const mapDispatchToProps = dispatch => ({
