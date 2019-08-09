@@ -3,7 +3,8 @@ import { CHECK_WEATHER_PENDING, CHECK_WEATHER, CHECK_WEATHER_LAT_LNG_PENDING, CH
 const initialState = {
   loading: false,
   forecasts: [],
-  location: {}
+  location: {},
+  valid: true,
 };
 
 export default function reducer(state = initialState, action) {
@@ -14,11 +15,19 @@ export default function reducer(state = initialState, action) {
       return { ...state, loading: true };
     case CHECK_WEATHER:
     case CHECK_WEATHER_LAT_LNG:
+      if(payload === 'invalid zip-code') {
+        return {
+          ...state,
+          loading: false,
+          valid: false
+        };
+      }
       return {
         ...state,
         loading: false,
         forecasts: payload.forecasts,
-        location: payload.location
+        location: payload.location,
+        valid: true
       };
     default:
       return state;
